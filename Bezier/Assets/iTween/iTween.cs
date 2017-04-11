@@ -6678,12 +6678,26 @@ public class iTween : MonoBehaviour{
 	}		
 	
 	private static void DrawPathHelper(Vector3[] path, Color color, string method){
+//        Gizmos.color = Color.red;
+//        foreach(Vector3 point in path)
+//        {
+//            Gizmos.DrawWireCube(point, Vector3.one * 0.3f);
+//        }
+
 		Vector3[] vector3s = PathControlPointGenerator(path);
         Gizmos.color = Color.yellow;
-        foreach(Vector3 point in vector3s)
+        for(int i = 0;i < vector3s.Length; i ++)
         {
-            Gizmos.DrawCube(point, Vector3.one);
+            Gizmos.DrawWireCube(vector3s[i], Vector3.one * 0.5f);
+
+            if(i < vector3s.Length - 1)
+                Gizmos.DrawLine(vector3s[i], vector3s[i + 1]);
         }
+
+
+        Vector3 test = Interp(vector3s,0.2f, true);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(test, 0.5f);
 		
 		//Line Draw:
 		Vector3 prevPt = Interp(vector3s,0);
@@ -6700,7 +6714,20 @@ public class iTween : MonoBehaviour{
 			}
 			prevPt = currPt;
 		}
+
+
+        float length = PathLength(vector3s);
+        Gizmos.color=Color.black;
+        for (int i = 1; i < 30; i++) 
+        {
+            float pm = (float) i / 30;
+            Vector3 currPt = Interp(vector3s,pm);
+            Gizmos.DrawSphere(currPt, 0.3f);
+        }
+       
 	}	
+
+
 	
 	private static Vector3[] PathControlPointGenerator(Vector3[] path){
 		Vector3[] suppliedPath;
@@ -6713,12 +6740,12 @@ public class iTween : MonoBehaviour{
 		int offset = 2;
 		vector3s = new Vector3[suppliedPath.Length+offset];
 		Array.Copy(suppliedPath,0,vector3s,1,suppliedPath.Length);
-		
+       
 		//populate start and end control points:
 		//vector3s[0] = vector3s[1] - vector3s[2];
 		vector3s[0] = vector3s[1] + (vector3s[1] - vector3s[2]);
 		vector3s[vector3s.Length-1] = vector3s[vector3s.Length-2] + (vector3s[vector3s.Length-2] - vector3s[vector3s.Length-3]);
-		
+
 		//is this a closed, continuous loop? yes? well then so let's make a continuous Catmull-Rom spline!
 		if(vector3s[1] == vector3s[vector3s.Length-2]){
 			Vector3[] tmpLoopSpline = new Vector3[vector3s.Length];
@@ -6733,15 +6760,56 @@ public class iTween : MonoBehaviour{
 	}
 	
 	//andeeee from the Unity forum's steller Catmull-Rom class ( http://forum.unity3d.com/viewtopic.php?p=218400#218400 ):
-	private static Vector3 Interp(Vector3[] pts, float t){
+    private static Vector3 Interp(Vector3[] pts, float t, bool isTest = false){
 		int numSections = pts.Length - 3;
 		int currPt = Mathf.Min(Mathf.FloorToInt(t * (float) numSections), numSections - 1);
 		float u = t * (float) numSections - (float) currPt;
+
 				
 		Vector3 a = pts[currPt];
 		Vector3 b = pts[currPt + 1];
 		Vector3 c = pts[currPt + 2];
 		Vector3 d = pts[currPt + 3];
+
+
+        if (isTest)
+        {
+            Debug.LogFormat("Interp t={0}, pts.Length={1}, numSections={2}, currPt={3}, u={4}", 
+                t, pts.Length, numSections, currPt, u);
+
+
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(a, 0.3f);
+            Gizmos.DrawWireSphere(b, 0.3f);
+            Gizmos.DrawWireSphere(c, 0.3f);
+            Gizmos.DrawWireSphere(d, 0.3f);
+
+            float fu = 1 - t;
+            Vector3 tp = a * Mathf.Pow(fu, 3)
+                         + 3 * b * Mathf.Pow(fu, 2)
+                         + 3 * c * Mathf.Pow(u, 2) * fu
+                         + d * Mathf.Pow(u, 3);
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(tp, 0.6f);
+
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere((-a + 3f * b - 3f * c + d), 0.3f);  
+            Gizmos.DrawLine((-a + 3f * b - 3f * c + d), (2f * a - 5f * b + 4f * c - d));
+
+            Gizmos.color = Color.red * 0.75f;
+            Gizmos.DrawSphere((2f * a - 5f * b + 4f * c - d), 0.3f);   
+            Gizmos.DrawLine((2f * a - 5f * b + 4f * c - d), (-a + c));
+
+            Gizmos.color = Color.red * 0.5f;
+            Gizmos.DrawSphere((-a + c), 0.3f);  
+            Gizmos.DrawLine((-a + c), 2f * b);
+
+            Gizmos.color = Color.red * 0.25f;
+            Gizmos.DrawSphere(2f * b, 0.3f);  
+
+        }
 		
 		return .5f * (
 			(-a + 3f * b - 3f * c + d) * (u * u * u)

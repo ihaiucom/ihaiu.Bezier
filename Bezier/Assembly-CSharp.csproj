@@ -53,6 +53,11 @@
      <Compile Include="Assets\TestBezierCurve.cs" />
      <Compile Include="Assets\iTween\iTween.cs" />
      <Compile Include="Assets\iTween\iTweenPath\iTweenPath.cs" />
+     <Compile Include="Assets\ihaiu\Scripts\Maths\BezierCurve.cs" />
+     <Compile Include="Assets\ihaiu\Scripts\Maths\BezierCurveSegment.cs" />
+     <Compile Include="Assets\ihaiu\Scripts\Maths\BezierPath.cs" />
+     <Compile Include="Assets\ihaiu\Scripts\Maths\BezierPathSegment.cs" />
+     <Compile Include="Assets\ihaiu\Scripts\Maths\BezierPoint.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity2/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
