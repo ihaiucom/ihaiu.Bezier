@@ -3588,6 +3588,8 @@ public class iTween : MonoBehaviour{
 			vector3s=new Vector3[tmpLoopSpline.Length];
 			Array.Copy(tmpLoopSpline,vector3s,tmpLoopSpline.Length);
 		}
+
+
 		
 		//create Catmull-Rom path:
 		path = new CRSpline(vector3s);
@@ -6686,26 +6688,31 @@ public class iTween : MonoBehaviour{
 
 		Vector3[] vector3s = PathControlPointGenerator(path);
         Gizmos.color = Color.yellow;
-        for(int i = 0;i < vector3s.Length; i ++)
-        {
-            Gizmos.DrawWireCube(vector3s[i], Vector3.one * 0.5f);
+//        for(int i = 0;i < vector3s.Length; i ++)
+//        {
+//            Gizmos.DrawWireCube(vector3s[i], Vector3.one * 0.5f);
+//
+//            if(i < vector3s.Length - 1)
+//                Gizmos.DrawLine(vector3s[i], vector3s[i + 1]);
+//        }
 
-            if(i < vector3s.Length - 1)
-                Gizmos.DrawLine(vector3s[i], vector3s[i + 1]);
-        }
 
+//        Vector3 test = Interp(vector3s,0.2f, true);
+//        Gizmos.color = Color.green;
+//        Gizmos.DrawWireSphere(test, 0.5f);
 
-        Vector3 test = Interp(vector3s,0.2f, true);
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(test, 0.5f);
-		
+		PathData pathData = TestBesizer.pathData;
+		if(pathData.points == null) pathData.points = new List<Vector3>();
+		else pathData.points.Clear();
 		//Line Draw:
 		Vector3 prevPt = Interp(vector3s,0);
 		Gizmos.color=color;
 		int SmoothAmount = path.Length*20;
+		pathData.points.Add(prevPt);
 		for (int i = 1; i <= SmoothAmount; i++) {
 			float pm = (float) i / SmoothAmount;
 			Vector3 currPt = Interp(vector3s,pm);
+			pathData.points.Add(currPt);
 			if(method == "gizmos"){
 				Gizmos.DrawLine(currPt, prevPt);
 			}else if(method == "handles"){
@@ -6717,12 +6724,16 @@ public class iTween : MonoBehaviour{
 
 
         float length = PathLength(vector3s);
-        Gizmos.color=Color.black;
         for (int i = 1; i < 30; i++) 
         {
             float pm = (float) i / 30;
-            Vector3 currPt = Interp(vector3s,pm);
-            Gizmos.DrawSphere(currPt, 0.3f);
+//			Vector3 currPt = Interp(vector3s,pm);
+//			Gizmos.color=Color.black;
+//            Gizmos.DrawSphere(currPt, 0.3f);
+
+
+			Gizmos.color=Color.white;
+			Gizmos.DrawSphere(pathData.getPos(pm), 0.4f);
         }
        
 	}	
@@ -6822,14 +6833,30 @@ public class iTween : MonoBehaviour{
 	//andeeee from the Unity forum's steller Catmull-Rom class ( http://forum.unity3d.com/viewtopic.php?p=218400#218400 ):
 	private class CRSpline {
 		public Vector3[] pts;
-		
+		PathData pathData ;
 		public CRSpline(params Vector3[] pts) {
-			this.pts = new Vector3[pts.Length];
-			Array.Copy(pts, this.pts, pts.Length);
+			pathData = TestBesizer.pathData;
+			if(pathData.points == null) pathData.points = new List<Vector3>();
+			else pathData.points.Clear();
+			//Line Draw:
+			Vector3 prevPt = iTween.Interp(pts,0);
+			int SmoothAmount = (pts.Length - 2)*10;
+			pathData.points.Add(prevPt);
+			for (int i = 1; i <= SmoothAmount; i++) {
+				float pm = (float) i / SmoothAmount;
+				Vector3 currPt = iTween.Interp(pts,pm);
+				pathData.points.Add(currPt);
+				prevPt = currPt;
+			}
+			this.pts = pathData.points.ToArray();
+
+//			this.pts = new Vector3[pts.Length];
+//			Array.Copy(pts, this.pts, pts.Length);
 		}
 		
 		
 		public Vector3 Interp(float t) {
+			return pathData.getPos(t);
 			int numSections = pts.Length - 3;
 			int currPt = Mathf.Min(Mathf.FloorToInt(t * (float) numSections), numSections - 1);
 			float u = t * (float) numSections - (float) currPt;
