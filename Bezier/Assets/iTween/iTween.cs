@@ -6733,7 +6733,7 @@ public class iTween : MonoBehaviour{
 
 
 			Gizmos.color=Color.white;
-			Gizmos.DrawSphere(pathData.getPos(pm), 0.4f);
+			Gizmos.DrawSphere(pathData.GetPos(pm), 0.4f);
         }
        
 	}	
@@ -6856,7 +6856,7 @@ public class iTween : MonoBehaviour{
 		
 		
 		public Vector3 Interp(float t) {
-			return pathData.getPos(t);
+			return pathData.GetPos(t);
 			int numSections = pts.Length - 3;
 			int currPt = Mathf.Min(Mathf.FloorToInt(t * (float) numSections), numSections - 1);
 			float u = t * (float) numSections - (float) currPt;

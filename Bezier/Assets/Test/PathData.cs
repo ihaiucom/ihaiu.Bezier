@@ -13,14 +13,14 @@ public class PathData
 	private float[] rates;
 	private float[] sumrates;
 
-	public void reset()
+	public void Reset()
 	{
 		isInit = false;
-		init();
+		Init();
 	}
 
 	private bool isInit;
-	private void init()
+	private void Init()
 	{
 		if(isInit) return;
 		isInit = true;
@@ -61,7 +61,7 @@ public class PathData
 		}
 	}
 
-	private int getBeginIndex(float t)
+	private int GetBeginIndex(float t)
 	{
 		for(int i = 0; i < count - 1; i ++)
 		{
@@ -74,13 +74,13 @@ public class PathData
 	}
 
 
-	public Vector3 getPos(float t)
+	public Vector3 GetPos(float t)
 	{
-		init();
+		Init();
 
 		if(t <= 0) return points[0];
 		if(t >= 1) return points[count - 1];
-		int begionIndex = getBeginIndex(t);
+		int begionIndex = GetBeginIndex(t);
 		Vector3 p0 = points[begionIndex];
 		Vector3 p1 = points[begionIndex + 1];
 
