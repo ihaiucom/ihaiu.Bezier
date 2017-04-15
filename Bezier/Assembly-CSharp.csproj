@@ -38,10 +38,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>/Applications/Unity2/Unity.app/Contents/Managed/UnityEngine.dll</HintPath>
+      <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>/Applications/Unity2/Unity.app/Contents/Managed/UnityEditor.dll</HintPath>
+      <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -49,7 +49,6 @@
      <Compile Include="Assets\Game\Scripts\CC\Libs\BezierArrow\Scripts\BezierPoint.cs" />
      <Compile Include="Assets\Game\Scripts\CC\Libs\BezierArrow\Scripts\BezierSegment.cs" />
      <Compile Include="Assets\Game\Scripts\CC\Libs\BezierArrow\Scripts\FollowMouse.cs" />
-     <Compile Include="Assets\Test\PathData.cs" />
      <Compile Include="Assets\Test\TestBesizer.cs" />
      <Compile Include="Assets\TestBezierCurve.cs" />
      <Compile Include="Assets\iTween\iTween.cs" />
@@ -60,11 +59,12 @@
      <Compile Include="Assets\ihaiu\Scripts\Maths\BezierSegment.cs" />
      <Compile Include="Assets\ihaiu\Scripts\Maths\BezierSegmentView.cs" />
      <Compile Include="Assets\ihaiu\Scripts\Maths\IBezier.cs" />
+     <Compile Include="Assets\ihaiu\Scripts\Maths\LinePath.cs" />
  <Reference Include="UnityEngine.UI">
- <HintPath>/Applications/Unity2/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
- <HintPath>/Applications/Unity2/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,17 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/ihaiu/Scripts/Maths/BezierPathView.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/ihaiu/Scripts/Maths/BezierPath.cs">
     <Files>
-      <File FileName="Assets/ihaiu/Scripts/Maths/BezierSegment.cs" Line="7" Column="49" />
-      <File FileName="Assets/ihaiu/Scripts/Maths/BezierPath.cs" Line="36" Column="14" />
-      <File FileName="Assets/ihaiu/Scripts/Maths/IBezier.cs" Line="6" Column="5" />
-      <File FileName="Assets/iTween/iTween.cs" Line="6868" Column="5" />
-      <File FileName="Assets/ihaiu/Scripts/Maths/Editor/BezierSegmentEditor.cs" Line="136" Column="17" />
-      <File FileName="Assets/ihaiu/Scripts/Maths/BezierSegmentView.cs" Line="32" Column="25" />
-      <File FileName="Assets/iTween/iTweenPath/Editor/iTweenPathEditor.cs" Line="100" Column="4" />
-      <File FileName="Assets/ihaiu/Scripts/Maths/BezierPoint.cs" Line="1" Column="1" />
-      <File FileName="Assets/ihaiu/Scripts/Maths/BezierPathView.cs" Line="32" Column="55" />
-      <File FileName="Assets/ihaiu/Scripts/Maths/Editor/BezierPathEditor.cs" Line="161" Column="30" />
+      <File FileName="Assets/ihaiu/Scripts/Maths/LinePath.cs" Line="77" Column="20" />
+      <File FileName="Assets/ihaiu/Scripts/Maths/BezierPath.cs" Line="255" Column="41" />
+      <File FileName="Assets/ihaiu/Scripts/Maths/BezierSegment.cs" Line="15" Column="53" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

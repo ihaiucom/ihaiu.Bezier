@@ -14,7 +14,7 @@ namespace ihaiu
 
 
         /** [辅助]平均速度   */
-        public PathData averagePath     = new PathData();
+        public LinePath averagePath     = new LinePath();
         /** [辅助]平均速度 精度  */
         [SerializeField]
         public int      averageAccuracy = 10;
@@ -188,7 +188,7 @@ namespace ihaiu
         public Vector3 GetAverage(float t)
         {
             InitAverage();
-            return averagePath.GetPos(t);
+            return averagePath.Get(t);
         }
 
 
@@ -199,7 +199,7 @@ namespace ihaiu
                 return this;
 
             Gizmos.color=color;
-            int SmoothAmount = 4*20;
+            int SmoothAmount = nodeCount*20;
 
             Vector3 prevPt = Get(0);
             for (int i = 1; i <= SmoothAmount; i++)
@@ -234,7 +234,7 @@ namespace ihaiu
                 return this;
             
             Gizmos.color=color;
-            int SmoothAmount = 4*10;
+            int SmoothAmount = nodeCount*10;
 
             for (int i = 0; i <= SmoothAmount; i++)
             {
@@ -252,7 +252,7 @@ namespace ihaiu
                 return this;
             
             Gizmos.color=color;
-            int SmoothAmount = 4*averageAccuracy;
+            int SmoothAmount = nodeCount*averageAccuracy;
 
             for (int i = 0; i <= SmoothAmount; i++)
             {

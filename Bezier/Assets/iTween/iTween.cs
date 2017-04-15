@@ -6701,7 +6701,7 @@ public class iTween : MonoBehaviour{
 //        Gizmos.color = Color.green;
 //        Gizmos.DrawWireSphere(test, 0.5f);
 
-		PathData pathData = TestBesizer.pathData;
+		LinePath pathData = TestBesizer.pathData;
 		if(pathData.points == null) pathData.points = new List<Vector3>();
 		else pathData.points.Clear();
 		//Line Draw:
@@ -6733,7 +6733,7 @@ public class iTween : MonoBehaviour{
 
 
 			Gizmos.color=Color.white;
-			Gizmos.DrawSphere(pathData.GetPos(pm), 0.4f);
+			Gizmos.DrawSphere(pathData.Get(pm), 0.4f);
         }
        
 	}	
@@ -6833,7 +6833,7 @@ public class iTween : MonoBehaviour{
 	//andeeee from the Unity forum's steller Catmull-Rom class ( http://forum.unity3d.com/viewtopic.php?p=218400#218400 ):
 	private class CRSpline {
 		public Vector3[] pts;
-		PathData pathData ;
+		LinePath pathData ;
 		public CRSpline(params Vector3[] pts) {
 			pathData = TestBesizer.pathData;
 			if(pathData.points == null) pathData.points = new List<Vector3>();
@@ -6856,7 +6856,7 @@ public class iTween : MonoBehaviour{
 		
 		
 		public Vector3 Interp(float t) {
-			return pathData.GetPos(t);
+			return pathData.Get(t);
 			int numSections = pts.Length - 3;
 			int currPt = Mathf.Min(Mathf.FloorToInt(t * (float) numSections), numSections - 1);
 			float u = t * (float) numSections - (float) currPt;

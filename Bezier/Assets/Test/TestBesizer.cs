@@ -14,7 +14,7 @@ public class TestBesizer : MonoBehaviour {
 
     public GameObject go;
 
-	public static PathData pathData = new PathData();
+	public static LinePath pathData = new LinePath();
 
 	// Use this for initialization
 	void Start () 

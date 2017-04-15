@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PathData
+public class LinePath
 {
 
 	public List<Vector3> points;
@@ -74,7 +74,7 @@ public class PathData
 	}
 
 
-	public Vector3 GetPos(float t)
+	public Vector3 Get(float t)
 	{
 		Init();
 

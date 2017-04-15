@@ -18,7 +18,7 @@ namespace ihaiu
         public BezierPoint end   = BezierPoint.Zero;
 
         /** [辅助]平均速度   */
-        public PathData averagePath     = new PathData();
+        public LinePath averagePath     = new LinePath();
         /** [辅助]平均速度 精度  */
         [SerializeField]
         public int      averageAccuracy = 10;
@@ -202,7 +202,7 @@ namespace ihaiu
         public Vector3 GetAverage(float t)
         {
             InitAverage();
-            return averagePath.GetPos(t);
+            return averagePath.Get(t);
         }
 
 
